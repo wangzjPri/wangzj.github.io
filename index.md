@@ -1,6 +1,6 @@
 ## Android
 
-[Selinux for android 踩坑记录](selinux.html)
+[Selinux for android 踩坑记录](/selinux.md)
 
 
 ### Markdown
