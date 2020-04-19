@@ -5,3 +5,9 @@
 - Selinux 强制权限系统（mac：Mandatory Access Control），规则由系统管理员制定，规则之外的访问权限一律不被允许（白名单系统）
 
 ## Android 下的selinux
+### 标签系统
+- file_contexts //系统中所有file_contexts安全上下文
+- seapp_contexts //app安全上下文
+- property_contexts //属性的安全上下文
+- service_contexts    //service文件安全上下文
+- genfs_contexts //虚拟文件系统安全上下文
