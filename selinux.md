@@ -11,3 +11,12 @@
 - property_contexts //属性的安全上下文
 - service_contexts    //service文件安全上下文
 - genfs_contexts //虚拟文件系统安全上下文
+- 进程标签，一般一个进程对应一个 {进程类型}.te 文件，例如对于系统签名的apk权限：  system_app.te
+### 标签系统的查看
+- 使用PS -Z 查看进程标签 ls -Z 查看文件或设备的标签
+### 属性系统
+
+
+
+
+[参考文章]（https://blog.csdn.net/shell812/article/details/58596377）
