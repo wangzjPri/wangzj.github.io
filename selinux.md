@@ -19,4 +19,5 @@
 
 
 
-[参考文章]（https://blog.csdn.net/shell812/article/details/58596377）
+[参考文章:应用场景举例](https://blog.csdn.net/shell812/article/details/58596377)
+[参考文章:type系统](https://blog.csdn.net/fybon/article/details/42263813)
