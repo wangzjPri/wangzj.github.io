@@ -1,4 +1,10 @@
 #  Selinux for android 踩坑记录
+## 概述
+  selinux 是一个复杂而又单纯的系统，复杂是因为对于一个白名单系统来说，太多的操作需要被允许，几万条规则组成的系统不可谓不复杂
+单纯是因为， 整个系统最核心的只有一句话：
+  allow [xx进程]   xx资源:xx类型  {操作} 
+  举例： allow fhservice cache_file:dir { open read search create rmdir getattr remove_name add_name write };
+  
 ## mac 与dac 
 - linux基于用户和组的权限系统（dac：Discretionary Access Control），对应的用户与组被赋予访问文件、设备的完全权限。
   - 例如文件权限为755的文件，赋予所有者权限7（读、写、执行），组所有者权限5（读取、执行），其他用户权限5（读取、执行
