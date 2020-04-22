@@ -3,6 +3,9 @@
 
 ###跳过google atv 版本开机向导：
 > pm disable com.google.android.tungsten.setupwraith
+
 > settings put secure user_setup_complete 1
+
 > settings put global device_provisioned 1
+
 > settings put secure tv_user_setup_complete 1
