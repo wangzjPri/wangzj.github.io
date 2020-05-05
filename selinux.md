@@ -23,6 +23,11 @@
 ### 属性系统
 
 
+###部分编译
+ make vendor_sepolicy.cil -j8
+
+输出目标文件： /vendor/etc/selinux/vendor_sepolicy.cil
+
 
 
 [参考文章:应用场景举例](https://blog.csdn.net/shell812/article/details/58596377)
