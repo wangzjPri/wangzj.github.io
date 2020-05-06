@@ -21,12 +21,72 @@
 ### 标签系统的查看
 - 使用PS -Z 查看进程标签 ls -Z 查看文件或设备的标签
 ### 属性系统
+type关键字：
+> Statement Identifier  # Comment
+> #-----------------------#---------------------------------------------------
+> type bin_t;             # A type identifier ends with _t
+> attribute file_type;    # An attribute identifier generally ends with _type
+
+type语句：
+> type type_id [alias alias_id] [, attribute_id];
+
+示例:
+> Using the type statement to declare a type of setfiles_t that 
+> also has an alias of restorecon_t and one previously declared
+> attribute of can_relabelto_binary_policy associated with it.
+
+> attribute can_relabelto_binary_policy;
+
+> type setfiles_t alias restorecon_t, can_relabelto_binary_policy;
+
+typeattribute 语句：
+> The typeattribute statement allows the association of previously declared types to one or more previously declared attributes.
+> The statement definition is:
+> typeattribute type_id attribute_id;
+
+
 
 
 ###部分编译
  make vendor_sepolicy.cil -j8
 
 输出目标文件： /vendor/etc/selinux/vendor_sepolicy.cil
+但替换此文件不能生效
+
+
+### USEFULL MACROS
+```
+define(`domain_trans', `
+# 例如：domain_trans(init, rootfs, adbd)  $1=init $2=rootfs $3=adbd
+
+# 允许 init进程读取、执行 rootfs类型的文件
+allow $1 $2:file { getattr open read execute map };
+# 允许 init进程 转化为adbd进程类型
+allow $1 $3:process transition;
+# 新进程通过执行文件 /bin/adbd 进入
+allow $3 $2:file { entrypoint open read execute getattr map };
+# adbd 进程允许发送 sigchld 消息给init进程
+ifelse($1, `init', `', `allow $3 $1:process sigchld;')
+# Enable AT_SECURE, i.e. libc secure mode.
+dontaudit $1 $3:process noatsecure;
+# XXX dontaudit candidate but requires further study.
+allow $1 $3:process { siginh rlimitinh };
+')
+
+#####################################
+# domain_auto_trans(olddomain, type, newdomain)
+# Automatically transition from olddomain to newdomain
+# upon executing a file labeled with type.
+# 例如：domain_auto_trans(adbd, shell_exec, shell)  olddomain:adbd type:shell_exec newdomain:shell
+
+define(`domain_auto_trans', `
+# Allow the necessary permissions.
+domain_trans($1,$2,$3)
+# 触发类型转化  type_transition语法： type_transition source_type target_type : class default_type;
+type_transition $1 $2:process $3;
+')
+```
+
 
 
 
