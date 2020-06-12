@@ -5,3 +5,8 @@ cmd in windows mysql : CREATE USER 'root'@'172.0.0.0/255.0.0.0' IDENTIFIED BY '<
 
 
 connect to host ip using : mysql --protocol=TCP -p -u root -h 172.25.128.1 --port=3306
+
+
+
+###enable access from sqlalchemy : 
+>ALTER USER 'username'@'ip_address' IDENTIFIED WITH mysql_native_password BY 'password';
